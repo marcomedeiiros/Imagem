@@ -1,0 +1,7 @@
+/node_modules
+
+## Todos files in /public/img sofrem o verbo
+/public/img/*
+
+##Excecao equals to !
+!/public/img/.gitkeep 
