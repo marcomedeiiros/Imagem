@@ -1,6 +1,6 @@
 import path from "path";
 import url from "url";
-import { createImagem, readImagem, updateImagem, deleteImagem } from "../models/imagemModel.js";
+import { createImagem, readImagem, updateImagem, deleteImagem, showOneImagem } from "../models/imagemModel.js";
 
 
 
@@ -77,7 +77,7 @@ export async function deletarImagem(req, res) {
   }
 }
 
-export async function mostrarImagem(req, res) {
+export async function dowloadImagem(req, res) {
   console.log("ImagemController :: Mostrando imagem");
 
   const { nomeImg } = req.params;
@@ -93,3 +93,16 @@ export async function mostrarImagem(req, res) {
     };
   });
 };
+
+export async function mostrarUmaImagem(req, res) {
+  console.log('ImagemController :: mostrarUmaImagem');
+  const { id_imagem } = req.params;
+
+  try {
+    const [status, retorno] = await showOneImagem(id_imagem);
+    res.status(status).json(retorno);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'ImagemController :: Erro' })
+  }
+}
